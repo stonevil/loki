@@ -1,3 +1,5 @@
+# vim:ft=helm :
+---
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Expand the name of the chart.
@@ -58,4 +60,15 @@ Create the app name of loki clients. Defaults to the same logic as "loki.fullnam
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Allow the release namespace to be overridden for multi-namespace deployments in combined charts
+*/}}
+{{- define "loki.namespace" -}}
+  {{- if .Values.namespaceOverride -}}
+    {{- .Values.namespaceOverride -}}
+  {{- else -}}
+    {{- .Release.Namespace -}}
+  {{- end -}}
 {{- end -}}
