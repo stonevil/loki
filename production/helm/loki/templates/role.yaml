@@ -1,3 +1,5 @@
+# vim:ft=helm :
+---
 {{- if .Values.rbac.create }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -17,4 +19,3 @@ rules:
   resourceNames:  [{{ template "loki.fullname" . }}]
 {{- end }}
 {{- end }}
-
